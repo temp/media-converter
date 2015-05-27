@@ -19,6 +19,7 @@ use FFMpeg\Filters\Audio\AudioResamplableFilter;
 use FFMpeg\Filters\Video\FrameRateFilter;
 use FFMpeg\Filters\Video\ResizeFilter;
 use FFMpeg\Filters\Video\SynchronizeFilter;
+use FFMpeg\Format\Video\DefaultVideo;
 use FFMpeg\Format\Video\Ogg;
 use FFMpeg\Format\Video\ThreeGP;
 use FFMpeg\Format\Video\WebM;
@@ -51,15 +52,13 @@ class VideoConverter implements ConverterInterface
     }
 
     /**
-     * @param string $inFilename
-     * @param Video  $spec
-     * @param string $outFilename
+     * @param string $videoFormat
+     *
+     * @return DefaultVideo
      */
-    public function convert($inFilename, Specification $spec, $outFilename)
+    private function createFormat($videoFormat)
     {
-        $video = $this->converter->open($inFilename);
-
-        switch ($spec->getVideoFormat()) {
+        switch ($videoFormat) {
             case 'flv';
                 $format = new Flv();
                 break;
@@ -91,6 +90,20 @@ class VideoConverter implements ConverterInterface
                 break;
         }
 
+        return $format;
+    }
+
+    /**
+     * @param string $inFilename
+     * @param Video  $spec
+     * @param string $outFilename
+     */
+    public function convert($inFilename, Specification $spec, $outFilename)
+    {
+        $video = $this->converter->open($inFilename);
+
+        $format = $this->createFormat($spec->getVideoFormat());
+
         $resizeMode = ResizeFilter::RESIZEMODE_FIT;
         if ($spec->getResizeMode()) {
             $resizeMode = $spec->getResizeMode();
@@ -101,7 +114,8 @@ class VideoConverter implements ConverterInterface
         if ($spec->getWidth() && $spec->getHeight()) {
             $video->addFilter(
                 new ResizeFilter(
-                    new Dimension($spec->getWidth(), $spec->getHeight()), $resizeMode
+                    new Dimension($spec->getWidth(), $spec->getHeight()),
+                    $resizeMode
                 )
             );
         }

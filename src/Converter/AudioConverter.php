@@ -15,6 +15,7 @@ use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
 use FFMpeg\Filters\Audio\AudioResamplableFilter;
 use FFMpeg\Format\Audio\Aac;
+use FFMpeg\Format\Audio\DefaultAudio;
 use FFMpeg\Format\Audio\Flac;
 use FFMpeg\Format\Audio\Mp3;
 use FFMpeg\Format\Audio\Vorbis;
@@ -42,6 +43,35 @@ class AudioConverter implements ConverterInterface
     }
 
     /**
+     * @param string $audioFormat
+     *
+     * @return DefaultAudio
+     */
+    private function createFormat($audioFormat)
+    {
+        switch ($audioFormat) {
+            case 'aac':
+                $format = new Aac();
+                break;
+
+            case 'flac':
+                $format = new Flac();
+                break;
+
+            case 'vorbis':
+                $format = new Vorbis();
+                break;
+
+            case 'mp3':
+            default:
+                $format = new Mp3();
+                break;
+        }
+
+        return $format;
+    }
+
+    /**
      * @param string $inFilename
      * @param Audio  $spec
      * @param string $outFilename
@@ -52,29 +82,7 @@ class AudioConverter implements ConverterInterface
     {
         $audio = $this->ffmpeg->open($inFilename);
 
-        if ($spec->getAudioFormat()) {
-            switch ($spec->getAudioFormat()) {
-                case 'aac':
-                    $format = new Aac();
-                    break;
-
-                case 'flac':
-                    $format = new Flac();
-                    break;
-
-                case 'vorbis':
-                    $format = new Vorbis();
-                    break;
-
-                case 'mp3':
-                default:
-                    $format = new Mp3();
-                    break;
-
-            }
-        } else {
-            $format = new Mp3();
-        }
+        $format = $this->createFormat($spec->getAudioFormat());
 
         if ($spec->getAudioCodec()) {
             $format->setAudioCodec($spec->getAudioCodec());
