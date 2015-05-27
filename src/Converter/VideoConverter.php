@@ -44,11 +44,18 @@ class VideoConverter implements ConverterInterface
     private $ffmpeg;
 
     /**
-     * @param FFMpeg $converter
+     * @var MP4Box
      */
-    public function __construct(FFMpeg $converter)
+    private $mp4box;
+
+    /**
+     * @param FFMpeg $ffmpeg
+     * @param MP4Box $mp4box
+     */
+    public function __construct(FFMpeg $ffmpeg, MP4Box $mp4box)
     {
-        $this->ffmpeg = $converter;
+        $this->ffmpeg = $ffmpeg;
+        $this->mp4box = $mp4box;
     }
 
     /**
@@ -157,5 +164,9 @@ class VideoConverter implements ConverterInterface
         }
 
         $video->save($format, $outFilename);
+
+        if ($format instanceof X264) {
+            $this->mp4box->process($outFilename);
+        }
     }
 }
