@@ -21,6 +21,13 @@ use Temp\MediaConverter\Format\Specification;
 interface ConverterInterface
 {
     /**
+     * @param Specification $spec
+     *
+     * @return bool
+     */
+    public function accept(Specification $spec);
+
+    /**
      * @param string        $inFilename
      * @param Specification $spec
      * @param string        $outFilename

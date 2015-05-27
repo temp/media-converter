@@ -42,6 +42,14 @@ class ImageConverter implements ConverterInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function accept(Specification $spec)
+    {
+        return $spec instanceof Image;
+    }
+
+    /**
      * @param string $inFilename
      * @param Image  $spec
      * @param string $outFilename

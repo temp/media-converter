@@ -35,11 +35,19 @@ class AudioConverter implements ConverterInterface
     private $ffmpeg;
 
     /**
-     * @param FFMpeg  $converter
+     * @param FFMpeg $converter
      */
     public function __construct(FFMpeg $converter)
     {
         $this->ffmpeg = $converter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function accept(Specification $spec)
+    {
+        return $spec instanceof Audio;
     }
 
     /**

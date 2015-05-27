@@ -41,14 +41,22 @@ class VideoConverter implements ConverterInterface
     /**
      * @var FFMpeg
      */
-    private $converter;
+    private $ffmpeg;
 
     /**
      * @param FFMpeg $converter
      */
     public function __construct(FFMpeg $converter)
     {
-        $this->converter = $converter;
+        $this->ffmpeg = $converter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function accept(Specification $spec)
+    {
+        return $spec instanceof Video;
     }
 
     /**
@@ -100,7 +108,7 @@ class VideoConverter implements ConverterInterface
      */
     public function convert($inFilename, Specification $spec, $outFilename)
     {
-        $video = $this->converter->open($inFilename);
+        $video = $this->ffmpeg->open($inFilename);
 
         $format = $this->createFormat($spec->getVideoFormat());
 
