@@ -18,8 +18,8 @@ use FFMpeg\Format\Audio\Aac;
 use FFMpeg\Format\Audio\Flac;
 use FFMpeg\Format\Audio\Mp3;
 use FFMpeg\Format\Audio\Vorbis;
-use Psr\Log\LoggerInterface;
 use Temp\MediaConverter\Format\Audio;
+use Temp\MediaConverter\Format\Specification;
 
 /**
  * Audio converter
@@ -48,7 +48,7 @@ class AudioConverter implements ConverterInterface
      *
      * @return string
      */
-    public function convert($inFilename, Audio $spec, $outFilename)
+    public function convert($inFilename, Specification $spec, $outFilename)
     {
         $audio = $this->ffmpeg->open($inFilename);
 

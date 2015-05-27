@@ -27,6 +27,7 @@ use FFMpeg\Format\Video\WMV3;
 use FFMpeg\Format\Video\X264;
 use Psr\Log\LoggerInterface;
 use Temp\MediaConverter\Ffmpeg\Format\Video\Flv;
+use Temp\MediaConverter\Format\Specification;
 use Temp\MediaConverter\Format\Video;
 
 /**
@@ -54,7 +55,7 @@ class VideoConverter implements ConverterInterface
      * @param Video  $spec
      * @param string $outFilename
      */
-    public function convert($inFilename, Video $spec, $outFilename)
+    public function convert($inFilename, Specification $spec, $outFilename)
     {
         $video = $this->converter->open($inFilename);
 

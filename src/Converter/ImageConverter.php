@@ -18,8 +18,8 @@ use Imagine\Image\Palette\CMYK;
 use Imagine\Image\Palette\Grayscale;
 use Imagine\Image\Palette\RGB;
 use Imagine\Image\Point;
-use Psr\Log\LoggerInterface;
 use Temp\MediaConverter\Format\Image;
+use Temp\MediaConverter\Format\Specification;
 
 /**
  * Image cache worker
@@ -46,7 +46,7 @@ class ImageConverter implements ConverterInterface
      * @param Image  $spec
      * @param string $outFilename
      */
-    public function convert($inFilename, Image $spec, $outFilename)
+    public function convert($inFilename, Specification $spec, $outFilename)
     {
         $image = $this->imagine->open($inFilename);
 
@@ -96,28 +96,28 @@ class ImageConverter implements ConverterInterface
             }
         }
 
-        $method = $template->getResizeMode();
+        $method = $spec->getResizeMode();
 
         if ($method === 'width') {
-            $size = $image->getSize()->widen($template->getParameter('width'));
+            $size = $image->getSize()->widen($spec->getWidth());
             $image->resize($size);
         } elseif ($method === 'height') {
-            $size = $image->getSize()->heighten($template->getParameter('height'));
+            $size = $image->getSize()->heighten($spec->getHeight());
             $image->resize($size);
         } elseif ($method === 'exact') {
-            $size = new Box($template->getParameter('width'), $template->getParameter('height'));
+            $size = new Box($spec->getWidth(), $spec->getHeight());
             $image->resize($size);
         } elseif ($method === 'fit') {
-            $size = new Box($template->getParameter('width'), $template->getParameter('height'));
+            $size = new Box($spec->getWidth(), $spec->getHeight());
             $image = $image->thumbnail($size, ImageInterface::THUMBNAIL_INSET);
         } elseif ($method === 'exactFit') {
-            $size = new Box($template->getParameter('width'), $template->getParameter('height'));
+            $size = new Box($spec->getWidth(), $spec->getHeight());
             $layer = $image->thumbnail($size, ImageInterface::THUMBNAIL_INSET);
             $layerSize = $layer->getSize();
 
             $palette = new RGB();
-            if ($template->hasParameter('backgroundcolor', true)) {
-                $color = $palette->color($template->getParameter('backgroundcolor'), 100);
+            if ($spec->getBackgroundColor()) {
+                $color = $palette->color($spec->getBackgroundColor(), 100);
             } else {
                 $color = $palette->color('#fff', 0);
             }
@@ -127,7 +127,7 @@ class ImageConverter implements ConverterInterface
                 floor(($size->getHeight() - $layerSize->getHeight()) / 2)
             ));
         } elseif ($method === 'crop') {
-            $size = new Box($template->getParameter('width'), $template->getParameter('height'));
+            $size = new Box($spec->getWidth(), $spec->getHeight());
             $imageSize = $image->getSize();
 
             if (!$size->contains($imageSize)) {

@@ -46,6 +46,21 @@ class Image implements Specification
     /**
      * @var int
      */
+    private $width;
+
+    /**
+     * @var int
+     */
+    private $height;
+
+    /**
+     * @var string
+     */
+    private $backgroundColor;
+
+    /**
+     * @var int
+     */
     private $centerX;
 
     /**
@@ -149,6 +164,66 @@ class Image implements Specification
     public function setResizeMode($resizeMode)
     {
         $this->resizeMode = $resizeMode;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * @param int $width
+     *
+     * @return $this
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param int $height
+     *
+     * @return $this
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackgroundColor()
+    {
+        return $this->backgroundColor;
+    }
+
+    /**
+     * @param string $backgroundColor
+     *
+     * @return $this
+     */
+    public function setBackgroundColor($backgroundColor)
+    {
+        $this->backgroundColor = $backgroundColor;
 
         return $this;
     }
