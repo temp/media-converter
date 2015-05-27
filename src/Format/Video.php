@@ -16,7 +16,7 @@ namespace Temp\MediaConverter\Format;
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
-class Video extends Audio
+class Video implements Specification
 {
     /**
      * @var string
@@ -57,6 +57,31 @@ class Video extends Audio
      * @var int
      */
     private $videoGop;
+
+    /**
+     * @var string
+     */
+    private $audioFormat;
+
+    /**
+     * @var string
+     */
+    private $audioCodec;
+
+    /**
+     * @var int
+     */
+    private $audioBitrate;
+
+    /**
+     * @var int
+     */
+    private $audioSamplerate;
+
+    /**
+     * @var int
+     */
+    private $audioChannels;
 
     /**
      * @return string
@@ -214,6 +239,106 @@ class Video extends Audio
     public function setVideoGop($videoGop)
     {
         $this->videoGop = $videoGop;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAudioFormat()
+    {
+        return $this->audioFormat;
+    }
+
+    /**
+     * @param string $audioFormat
+     *
+     * @return $this
+     */
+    public function setAudioFormat($audioFormat)
+    {
+        $this->audioFormat = $audioFormat;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAudioCodec()
+    {
+        return $this->audioCodec;
+    }
+
+    /**
+     * @param string $audioCodec
+     *
+     * @return $this
+     */
+    public function setAudioCodec($audioCodec)
+    {
+        $this->audioCodec = $audioCodec;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAudioBitrate()
+    {
+        return $this->audioBitrate;
+    }
+
+    /**
+     * @param int $audioBitrate
+     *
+     * @return $this
+     */
+    public function setAudioBitrate($audioBitrate)
+    {
+        $this->audioBitrate = $audioBitrate;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAudioSamplerate()
+    {
+        return $this->audioSamplerate;
+    }
+
+    /**
+     * @param int $audioSamplerate
+     *
+     * @return $this
+     */
+    public function setAudioSamplerate($audioSamplerate)
+    {
+        $this->audioSamplerate = $audioSamplerate;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAudioChannels()
+    {
+        return $this->audioChannels;
+    }
+
+    /**
+     * @param int $audioChannels
+     *
+     * @return $this
+     */
+    public function setAudioChannels($audioChannels)
+    {
+        $this->audioChannels = $audioChannels;
 
         return $this;
     }
