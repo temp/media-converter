@@ -20,7 +20,7 @@ use Temp\MediaConverter\Format\Specification;
 use Temp\MediaConverter\Format\Image;
 
 /**
- * GetId3 image extractor
+ * Exiftool image extractor
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
