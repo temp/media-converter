@@ -26,7 +26,7 @@ use FFMpeg\Format\Video\WebM;
 use FFMpeg\Format\Video\WMV;
 use FFMpeg\Format\Video\WMV3;
 use FFMpeg\Format\Video\X264;
-use Psr\Log\LoggerInterface;
+use MP4Box\MP4Box;
 use Temp\MediaConverter\Ffmpeg\Format\Video\Flv;
 use Temp\MediaConverter\Format\Specification;
 use Temp\MediaConverter\Format\Video;
