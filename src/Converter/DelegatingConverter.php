@@ -38,6 +38,12 @@ class DelegatingConverter implements ConverterInterface
      */
     public function accept(Specification $spec)
     {
+        $converter = $this->resolver->resolve($spec);
+
+        if (!$converter) {
+            return false;
+        }
+
         return true;
     }
 
