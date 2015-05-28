@@ -29,9 +29,23 @@ class ExtractorResolver implements ExtractorResolverInterface
     /**
      * @param ExtractorInterface[] $extractors
      */
-    public function __construct(array $extractors = [])
+    public function __construct(array $extractors = array())
     {
-        $this->extractors = $extractors;
+        foreach ($extractors as $extractor) {
+            $this->addExtractor($extractor);
+        }
+    }
+
+    /**
+     * @param ExtractorInterface $extractor
+     *
+     * @return $this
+     */
+    public function addExtractor(ExtractorInterface $extractor)
+    {
+        $this->extractors[] = $extractor;
+
+        return $this;
     }
 
     /**
