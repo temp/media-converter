@@ -57,6 +57,10 @@ class DelegatingExtractor implements ExtractorInterface
     {
         $mediaType = $this->mediaClassifier->classify($filename);
 
+        if (!$mediaType) {
+            return null;
+        }
+
         $extractor = $this->resolver->resolve($filename, $mediaType, $targetFormat);
 
         if (!$extractor) {

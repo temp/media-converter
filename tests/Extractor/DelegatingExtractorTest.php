@@ -56,6 +56,21 @@ class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result);
     }
 
+    public function testExtractReturnsNullOnUnclassifiedFile()
+    {
+        $resolver = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorResolver');
+        $mediaClassifier = $this->prophesize('Temp\MediaClassifier\MediaClassifier');
+
+        $extractor = new DelegatingExtractor($resolver->reveal(), $mediaClassifier->reveal());
+
+        $mediaClassifier->classify('input')->willReturn(false);
+        $resolver->resolve('input', Argument::cetera())->shouldNotBeCalled();
+
+        $result = $extractor->extract('input', new Image());
+
+        $this->assertNull($result);
+    }
+
     public function testExtractReturnsNullOnUnresolvedExtractor()
     {
         $resolver = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorResolver');
@@ -71,7 +86,7 @@ class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($result);
     }
 
-    public function testExtract()
+    public function testExtractReturnsExtractedFilename()
     {
         $resolver = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorResolver');
         $mediaClassifier = $this->prophesize('Temp\MediaClassifier\MediaClassifier');
