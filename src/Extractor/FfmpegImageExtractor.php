@@ -13,6 +13,7 @@ namespace Temp\MediaConverter\Extractor;
 
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
+use Symfony\Component\Filesystem\Filesystem;
 use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaConverter\Format\Specification;
 use Temp\MediaConverter\Format\Image;
@@ -64,6 +65,11 @@ class FfmpegImageExtractor implements ExtractorInterface
         $imageFilename = null;
 
         try {
+            $filesystem = new Filesystem();
+            if (!$filesystem->exists($this->tempDir)) {
+                $filesystem->mkdir($this->tempDir);
+            }
+
             $imageFilename = $this->tempDir . '/' . uniqid() . '.jpg';
 
             $this->converter

@@ -74,8 +74,13 @@ class ExiftoolImageExtractor implements ExtractorInterface
                 continue;
             }
 
-            $content = (string) $metadata->getValue()->asString();
             $filesystem = new Filesystem();
+            if (!$filesystem->exists($this->tempDir)) {
+                $filesystem->mkdir($this->tempDir);
+            }
+
+            $content = (string) $metadata->getValue()->asString();
+
             $filesystem->dumpFile($imageFilename, $content);
 
             return $imageFilename;
