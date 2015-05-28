@@ -73,32 +73,32 @@ class VideoConverter implements ConverterInterface
     private function createFormat($videoFormat)
     {
         switch ($videoFormat) {
-            case 'flv';
+            case 'flv':
                 $format = new Flv();
                 break;
 
-            case 'ogg';
+            case 'ogg':
                 $format = new Ogg();
                 break;
 
-            case 'webm';
+            case 'webm':
                 $format = new WebM();
                 break;
 
-            case 'wmv';
+            case 'wmv':
                 $format = new WMV();
                 break;
 
-            case 'wmv3';
+            case 'wmv3':
                 $format = new WMV3();
                 break;
 
-            case '3gp';
+            case '3gp':
                 $format = new ThreeGP();
                 break;
 
-            case 'mp4';
-            case 'x264';
+            case 'mp4':
+            case 'x264':
             default:
                 $format = new X264();
                 break;
