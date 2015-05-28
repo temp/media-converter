@@ -12,7 +12,6 @@
 namespace Temp\MediaConverter\Converter;
 
 use FFMpeg\FFMpeg;
-use FFMpeg\FFProbe;
 use FFMpeg\Filters\Audio\AudioResamplableFilter;
 use FFMpeg\Format\Audio\Aac;
 use FFMpeg\Format\Audio\DefaultAudio;

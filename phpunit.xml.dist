@@ -6,7 +6,7 @@
          convertWarningsToExceptions="true"
          syntaxCheck="true">
     <testsuites>
-        <testsuite name="Media Classifier Tests Suite">
+        <testsuite name="Media Converter Tests Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

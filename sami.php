@@ -12,7 +12,7 @@ $iterator = Finder::create()
 ;
 
 return new Sami($iterator, array(
-    'title'                => 'Media Classifier API',
+    'title'                => 'Media Converter API',
     'build_dir'            => __DIR__.'/build/api',
     'cache_dir'            => __DIR__.'/build/cache',
     'default_opened_level' => 2,

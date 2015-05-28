@@ -14,7 +14,6 @@ namespace Temp\MediaConverter\Converter;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\FrameRate;
 use FFMpeg\FFMpeg;
-use FFMpeg\FFProbe;
 use FFMpeg\Filters\Audio\AudioResamplableFilter;
 use FFMpeg\Filters\Video\FrameRateFilter;
 use FFMpeg\Filters\Video\ResizeFilter;

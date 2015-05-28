@@ -1,7 +1,8 @@
-Temp Media Classifier
-=====================
+Temp Media Converter
+====================
 
-[![Build Status](https://travis-ci.org/temp/media-classifier.svg?branch=master)](https://travis-ci.org/temp/media-classifier)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/613a24a4-4852-4d7f-a2c6-f4bd927bd9a1/mini.png)](https://insight.sensiolabs.com/projects/613a24a4-4852-4d7f-a2c6-f4bd927bd9a1)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/temp/media-classifier/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/temp/media-classifier/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/temp/media-classifier/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/temp/media-classifier/?branch=master)
+[![Build Status](https://travis-ci.org/temp/media-converter.svg?branch=master)](https://travis-ci.org/temp/media-converter)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/eb5be5b3-d465-4b3d-84df-056067c525fc/mini.png)](https://insight.sensiolabs.com/projects/eb5be5b3-d465-4b3d-84df-056067c525fc)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/temp/media-converter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/temp/media-converter/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/temp/media-converter/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/temp/media-converter/?branch=master)
+[![Dependency Status](https://www.versioneye.com/php/temp:media-converter/dev-master/badge.png)](https://www.versioneye.com/php/temp:media-converter/dev-master)
