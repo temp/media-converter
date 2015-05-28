@@ -17,7 +17,7 @@ use Temp\MediaConverter\Extractor\ExtractorResolver;
 use Temp\MediaConverter\Format\Image;
 
 /**
- * Extractor resolver
+ * Extractor resolver test
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
