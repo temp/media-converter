@@ -77,7 +77,7 @@ class FfmpegImageExtractor implements ExtractorInterface
                 ->frame(TimeCode::fromSeconds(3))
                 ->save($imageFilename);
         } catch (\Exception $e) {
-            $imageFile = null;
+            $imageFilename = null;
         }
 
         return $imageFilename;
