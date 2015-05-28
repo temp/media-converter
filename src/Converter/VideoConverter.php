@@ -157,6 +157,8 @@ class VideoConverter implements ConverterInterface
 
         if ($spec->getAudioSamplerate()) {
             $video->addFilter(new AudioResamplableFilter($spec->getAudioSamplerate()));
+        } elseif ($format instanceof Flv) {
+            $video->addFilter(new AudioResamplableFilter(44100));
         }
 
         if ($spec->getAudioChannels()) {

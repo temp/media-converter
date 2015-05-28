@@ -51,13 +51,19 @@ class Transmuter
      * @param Specification $targetFormat
      * @param string        $outFilename
      *
-     * @return string
+     * @return string|null
      */
     public function transmute($inFilename, Specification $targetFormat, $outFilename)
     {
         $extractedFile = $this->extractor->extract($inFilename, $targetFormat);
 
-        return $this->converter->convert($extractedFile, $targetFormat, $outFilename);
+        if (!$extractedFile) {
+            return null;
+        }
+
+        $this->converter->convert($extractedFile, $targetFormat, $outFilename);
+
+        return $outFilename;
     }
 
     /**
