@@ -70,7 +70,8 @@ class ExiftoolImageExtractor implements ExtractorInterface
         foreach ($metadatas as $metadata) {
             /* @var $metadata Metadata */
 
-            if ($metadata->getTag()->getName() !== 'Picture' && ValueInterface::TYPE_BINARY !== $metadata->getValue()->getType()) {
+            if ($metadata->getTag()->getName() !== 'Picture' &&
+                    ValueInterface::TYPE_BINARY !== $metadata->getValue()->getType()) {
                 continue;
             }
 
