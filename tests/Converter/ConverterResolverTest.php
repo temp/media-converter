@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Temp\MediaConverter\Converter\Tests;
+namespace Temp\MediaConverter\Tests\Converter;
 
 use Prophecy\Argument;
 use Temp\MediaConverter\Converter\ConverterResolver;
