@@ -16,7 +16,6 @@ use Temp\MediaClassifier\MediaClassifier;
 use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaConverter\Extractor\DelegatingExtractor;
 use Temp\MediaConverter\Format\Image;
-use Temp\MediaConverter\Format\Specification;
 
 /**
  * Delegating extractor test
