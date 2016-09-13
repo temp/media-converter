@@ -18,6 +18,13 @@ namespace Temp\MediaConverter\Format;
  */
 class Image implements Specification
 {
+    const RESIZE_METHOD_WIDTH = 'width';
+    const RESIZE_METHOD_HEIGHT = 'height';
+    const RESIZE_METHOD_FIT = 'fit';
+    const RESIZE_METHOD_EXACT = 'extact';
+    const RESIZE_METHOD_EXACT_FIT = 'extactFit';
+    const RESIZE_METHOD_CROP = 'crop';
+
     /**
      * @var string
      */

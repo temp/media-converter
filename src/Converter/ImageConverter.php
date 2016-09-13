@@ -106,19 +106,19 @@ class ImageConverter implements ConverterInterface
 
         $method = $spec->getResizeMode();
 
-        if ($method === 'width') {
+        if ($method === Image::RESIZE_METHOD_WIDTH) {
             $size = $image->getSize()->widen($spec->getWidth());
             $image->resize($size);
-        } elseif ($method === 'height') {
+        } elseif ($method === Image::RESIZE_METHOD_HEIGHT) {
             $size = $image->getSize()->heighten($spec->getHeight());
             $image->resize($size);
-        } elseif ($method === 'exact') {
+        } elseif ($method === Image::RESIZE_METHOD_EXACT) {
             $size = new Box($spec->getWidth(), $spec->getHeight());
             $image->resize($size);
-        } elseif ($method === 'fit') {
+        } elseif ($method === Image::RESIZE_METHOD_FIT) {
             $size = new Box($spec->getWidth(), $spec->getHeight());
             $image = $image->thumbnail($size, ImageInterface::THUMBNAIL_INSET);
-        } elseif ($method === 'exactFit') {
+        } elseif ($method === Image::RESIZE_METHOD_EXACT_FIT) {
             $size = new Box($spec->getWidth(), $spec->getHeight());
             $layer = $image->thumbnail($size, ImageInterface::THUMBNAIL_INSET);
             $layerSize = $layer->getSize();
@@ -134,7 +134,7 @@ class ImageConverter implements ConverterInterface
                 floor(($size->getWidth() - $layerSize->getWidth()) / 2),
                 floor(($size->getHeight() - $layerSize->getHeight()) / 2)
             ));
-        } elseif ($method === 'crop') {
+        } elseif ($method === Image::RESIZE_METHOD_CROP) {
             $size = new Box($spec->getWidth(), $spec->getHeight());
             $imageSize = $image->getSize();
 
