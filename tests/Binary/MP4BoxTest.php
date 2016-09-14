@@ -5,6 +5,9 @@ namespace Temp\MediaConverter\Tests\Binary;
 use Alchemy\BinaryDriver\BinaryDriverTestCase;
 use Temp\MediaConverter\Binary\MP4Box;
 
+/**
+ * MP4Box test
+ */
 class MP4BoxTest extends BinaryDriverTestCase
 {
     public function testProcessOutputWithCustomOutput()

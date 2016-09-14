@@ -12,7 +12,6 @@
 namespace Temp\MediaConverter\Tests\Functional;
 
 use Imagine\Imagick\Imagine;
-use Prophecy\Argument;
 use Temp\MediaConverter\Converter\ImageConverter;
 use Temp\MediaConverter\Format\Audio;
 use Temp\MediaConverter\Format\Image;
@@ -20,8 +19,6 @@ use Temp\MediaConverter\Format\Video;
 
 /**
  * Image converter test
- *
- * @author Stephan Wentz <stephan@wentz.it>
  *
  * @group functional
  */

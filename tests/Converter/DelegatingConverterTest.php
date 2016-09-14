@@ -12,26 +12,26 @@
 namespace Temp\MediaConverter\Tests\Converter;
 
 use Prophecy\Argument;
-use Temp\MediaClassifier\MediaClassifier;
-use Temp\MediaClassifier\Model\MediaType;
+use Temp\MediaConverter\Converter\ConverterInterface;
+use Temp\MediaConverter\Converter\ConverterResolver;
 use Temp\MediaConverter\Converter\DelegatingConverter;
-use Temp\MediaConverter\Extractor\DelegatingExtractor;
 use Temp\MediaConverter\Format\Image;
+use Temp\MediaConverter\Format\Specification;
 
 /**
  * Delegating converter test
  *
- * @author Stephan Wentz <stephan@wentz.it>
+ * @covers DelegatingConverter
  */
 class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
 {
     public function testAcceptReturnsFalseOnUnresolvedExtractor()
     {
-        $resolver = $this->prophesize('Temp\MediaConverter\Converter\ConverterResolver');
+        $resolver = $this->prophesize(ConverterResolver::class);
 
         $extractor = new DelegatingConverter($resolver->reveal());
 
-        $resolver->resolve(Argument::type('Temp\MediaConverter\Format\Specification'))->willReturn(null);
+        $resolver->resolve(Argument::type(Specification::class))->willReturn(null);
 
         $result = $extractor->accept(new Image());
 
@@ -40,13 +40,13 @@ class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
 
     public function testSupportsReturnsTrueOnResolvedExtractor()
     {
-        $resolver = $this->prophesize('Temp\MediaConverter\Converter\ConverterResolver');
-        $nestedConverter = $this->prophesize('Temp\MediaConverter\Converter\ConverterInterface');
+        $resolver = $this->prophesize(ConverterResolver::class);
+        $nestedConverter = $this->prophesize(ConverterInterface::class);
 
         $extractor = new DelegatingConverter($resolver->reveal());
 
-        $resolver->resolve(Argument::type('Temp\MediaConverter\Format\Specification'))->willReturn($nestedConverter->reveal());
-        $nestedConverter->accept(Argument::type('Temp\MediaConverter\Format\Specification'))->willReturn(true);
+        $resolver->resolve(Argument::type(Specification::class))->willReturn($nestedConverter->reveal());
+        $nestedConverter->accept(Argument::type(Specification::class))->willReturn(true);
 
         $result = $extractor->accept(new Image());
 
@@ -58,24 +58,24 @@ class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
      */
     public function testConvertThrowsExceptionOnUnresolvedConverter()
     {
-        $resolver = $this->prophesize('Temp\MediaConverter\Converter\ConverterResolver');
+        $resolver = $this->prophesize(ConverterResolver::class);
 
         $converter = new DelegatingConverter($resolver->reveal());
 
-        $resolver->resolve(Argument::type('Temp\MediaConverter\Format\Specification'))->willReturn(null);
+        $resolver->resolve(Argument::type(Specification::class))->willReturn(null);
 
         $result = $converter->convert('input', new Image(), 'output');
     }
 
     public function testConvertReturnsExtractedFilename()
     {
-        $resolver = $this->prophesize('Temp\MediaConverter\Converter\ConverterResolver');
-        $nestedConverter = $this->prophesize('Temp\MediaConverter\Converter\ConverterInterface');
+        $resolver = $this->prophesize(ConverterResolver::class);
+        $nestedConverter = $this->prophesize(ConverterInterface::class);
 
         $extractor = new DelegatingConverter($resolver->reveal());
 
         $resolver->resolve(Argument::cetera())->willReturn($nestedConverter->reveal());
-        $nestedConverter->convert('input', Argument::type('Temp\MediaConverter\Format\Specification'), 'output')->willReturn('output');
+        $nestedConverter->convert('input', Argument::type(Specification::class), 'output')->willReturn('output');
 
         $result = $extractor->convert('input', new Image(), 'output');
 

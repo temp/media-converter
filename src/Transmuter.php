@@ -20,8 +20,6 @@ use Temp\MediaConverter\Format\Video;
 
 /**
  * Transmuter
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class Transmuter
 {

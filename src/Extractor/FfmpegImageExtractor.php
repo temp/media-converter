@@ -20,8 +20,6 @@ use Temp\MediaConverter\Format\Image;
 
 /**
  * Video converter extractor
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class FfmpegImageExtractor implements ExtractorInterface
 {

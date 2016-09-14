@@ -25,15 +25,13 @@ use FFMpeg\Format\Video\WebM;
 use FFMpeg\Format\Video\WMV;
 use FFMpeg\Format\Video\WMV3;
 use FFMpeg\Format\Video\X264;
-use MP4Box\MP4Box;
+use Temp\MediaConverter\Binary\MP4Box;
 use Temp\MediaConverter\Ffmpeg\Format\Video\Flv;
 use Temp\MediaConverter\Format\Specification;
 use Temp\MediaConverter\Format\Video;
 
 /**
  * Video converter
- *
- * @author Stephan Wentz <sw@brainbits.net>
  */
 class VideoConverter implements ConverterInterface
 {

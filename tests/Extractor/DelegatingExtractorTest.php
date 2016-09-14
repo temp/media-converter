@@ -15,19 +15,21 @@ use Prophecy\Argument;
 use Temp\MediaClassifier\MediaClassifier;
 use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaConverter\Extractor\DelegatingExtractor;
+use Temp\MediaConverter\Extractor\ExtractorInterface;
+use Temp\MediaConverter\Extractor\ExtractorResolver;
 use Temp\MediaConverter\Format\Image;
 
 /**
  * Delegating extractor test
  *
- * @author Stephan Wentz <stephan@wentz.it>
+ * @covers DelegatingExtractor
  */
 class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
 {
     public function testSupportsReturnsFalseOnUnresolvedExtractor()
     {
-        $resolver = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorResolver');
-        $mediaClassifier = $this->prophesize('Temp\MediaClassifier\MediaClassifier');
+        $resolver = $this->prophesize(ExtractorResolver::class);
+        $mediaClassifier = $this->prophesize(MediaClassifier::class);
 
         $extractor = new DelegatingExtractor($resolver->reveal(), $mediaClassifier->reveal());
 
@@ -41,9 +43,9 @@ class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
 
     public function testSupportsReturnsTrueOnResolvedExtractor()
     {
-        $resolver = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorResolver');
-        $mediaClassifier = $this->prophesize('Temp\MediaClassifier\MediaClassifier');
-        $nestedExtractor = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorInterface');
+        $resolver = $this->prophesize(ExtractorResolver::class);
+        $mediaClassifier = $this->prophesize(MediaClassifier::class);
+        $nestedExtractor = $this->prophesize(ExtractorInterface::class);
 
         $extractor = new DelegatingExtractor($resolver->reveal(), $mediaClassifier->reveal());
 
@@ -58,8 +60,8 @@ class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
 
     public function testExtractReturnsNullOnUnclassifiedFile()
     {
-        $resolver = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorResolver');
-        $mediaClassifier = $this->prophesize('Temp\MediaClassifier\MediaClassifier');
+        $resolver = $this->prophesize(ExtractorResolver::class);
+        $mediaClassifier = $this->prophesize(MediaClassifier::class);
 
         $extractor = new DelegatingExtractor($resolver->reveal(), $mediaClassifier->reveal());
 
@@ -73,8 +75,8 @@ class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
 
     public function testExtractReturnsNullOnUnresolvedExtractor()
     {
-        $resolver = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorResolver');
-        $mediaClassifier = $this->prophesize('Temp\MediaClassifier\MediaClassifier');
+        $resolver = $this->prophesize(ExtractorResolver::class);
+        $mediaClassifier = $this->prophesize(MediaClassifier::class);
 
         $extractor = new DelegatingExtractor($resolver->reveal(), $mediaClassifier->reveal());
 
@@ -88,9 +90,9 @@ class DelegatingExtractorTest extends \PHPUnit_Framework_TestCase
 
     public function testExtractReturnsExtractedFilename()
     {
-        $resolver = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorResolver');
-        $mediaClassifier = $this->prophesize('Temp\MediaClassifier\MediaClassifier');
-        $nestedExtractor = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorInterface');
+        $resolver = $this->prophesize(ExtractorResolver::class);
+        $mediaClassifier = $this->prophesize(MediaClassifier::class);
+        $nestedExtractor = $this->prophesize(ExtractorInterface::class);
 
         $extractor = new DelegatingExtractor($resolver->reveal(), $mediaClassifier->reveal());
 

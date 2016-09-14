@@ -17,8 +17,6 @@ use Temp\MediaConverter\Format\Image;
 
 /**
  * Raw image extractor
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class RawImageExtractor implements ExtractorInterface
 {

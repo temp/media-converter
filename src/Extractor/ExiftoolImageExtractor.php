@@ -21,8 +21,6 @@ use Temp\MediaConverter\Format\Image;
 
 /**
  * Exiftool image extractor
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class ExiftoolImageExtractor implements ExtractorInterface
 {

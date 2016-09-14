@@ -13,19 +13,20 @@ namespace Temp\MediaConverter\Extractor\Tests;
 
 use Prophecy\Argument;
 use Temp\MediaClassifier\Model\MediaType;
+use Temp\MediaConverter\Extractor\ExtractorInterface;
 use Temp\MediaConverter\Extractor\ExtractorResolver;
 use Temp\MediaConverter\Format\Image;
 
 /**
  * Extractor resolver test
  *
- * @author Stephan Wentz <stephan@wentz.it>
+ * @covers ExtractorResolver
  */
 class ExtractorResolverTest extends \PHPUnit_Framework_TestCase
 {
     public function testResolveReturnsNullOnNonMatchingExtractors()
     {
-        $extractor1 = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorInterface');
+        $extractor1 = $this->prophesize(ExtractorInterface::class);
 
         $resolver = new ExtractorResolver(
             array(
@@ -42,7 +43,7 @@ class ExtractorResolverTest extends \PHPUnit_Framework_TestCase
 
     public function testResolveReturnsMatchingExtractor()
     {
-        $extractor1 = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorInterface');
+        $extractor1 = $this->prophesize(ExtractorInterface::class);
 
         $resolver = new ExtractorResolver(
             array(
@@ -59,8 +60,8 @@ class ExtractorResolverTest extends \PHPUnit_Framework_TestCase
 
     public function testResolveReturnsOnlyMatchingExtractor()
     {
-        $extractor1 = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorInterface');
-        $extractor2 = $this->prophesize('Temp\MediaConverter\Extractor\ExtractorInterface');
+        $extractor1 = $this->prophesize(ExtractorInterface::class);
+        $extractor2 = $this->prophesize(ExtractorInterface::class);
 
         $resolver = new ExtractorResolver(
             array(

@@ -17,8 +17,6 @@ use Temp\MediaConverter\Format\Video;
 
 /**
  * Raw video extractor
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class RawVideoExtractor implements ExtractorInterface
 {

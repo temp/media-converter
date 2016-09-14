@@ -12,19 +12,20 @@
 namespace Temp\MediaConverter\Tests\Converter;
 
 use Prophecy\Argument;
+use Temp\MediaConverter\Converter\ConverterInterface;
 use Temp\MediaConverter\Converter\ConverterResolver;
 use Temp\MediaConverter\Format\Image;
 
 /**
  * Converter resolver test
  *
- * @author Stephan Wentz <stephan@wentz.it>
+ * @covers ConverterResolver
  */
 class ConverterResolverTest extends \PHPUnit_Framework_TestCase
 {
     public function testResolveReturnsNullOnNonMatchingConverters()
     {
-        $converter1 = $this->prophesize('Temp\MediaConverter\Converter\ConverterInterface');
+        $converter1 = $this->prophesize(ConverterInterface::class);
 
         $resolver = new ConverterResolver(
             array(
@@ -41,7 +42,7 @@ class ConverterResolverTest extends \PHPUnit_Framework_TestCase
 
     public function testResolveReturnsAcceptingConverter()
     {
-        $converter1 = $this->prophesize('Temp\MediaConverter\Converter\ConverterInterface');
+        $converter1 = $this->prophesize(ConverterInterface::class);
 
         $resolver = new ConverterResolver(
             array(
@@ -58,8 +59,8 @@ class ConverterResolverTest extends \PHPUnit_Framework_TestCase
 
     public function testResolveReturnsOnlyAcceptingConverter()
     {
-        $converter1 = $this->prophesize('Temp\MediaConverter\Converter\ConverterInterface');
-        $converter2 = $this->prophesize('Temp\MediaConverter\Converter\ConverterInterface');
+        $converter1 = $this->prophesize(ConverterInterface::class);
+        $converter2 = $this->prophesize(ConverterInterface::class);
 
         $resolver = new ConverterResolver(
             array(

@@ -19,7 +19,7 @@ use Temp\MediaConverter\Format\Video;
 /**
  * Raw image extractor
  *
- * @author Stephan Wentz <stephan@wentz.it>
+ * @covers RawImageExtractor
  */
 class RawImageExtractorTest extends \PHPUnit_Framework_TestCase
 {

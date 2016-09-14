@@ -13,8 +13,6 @@ namespace Temp\MediaConverter\Format;
 
 /**
  * Audio specification
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class Audio implements Specification
 {

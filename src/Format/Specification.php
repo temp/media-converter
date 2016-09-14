@@ -13,8 +13,6 @@ namespace Temp\MediaConverter\Format;
 
 /**
  * Specification
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 interface Specification
 {

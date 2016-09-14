@@ -23,8 +23,6 @@ use Temp\MediaConverter\Format\Specification;
 
 /**
  * Audio converter
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class AudioConverter implements ConverterInterface
 {

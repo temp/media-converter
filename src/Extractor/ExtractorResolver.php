@@ -16,8 +16,6 @@ use Temp\MediaConverter\Format\Specification;
 
 /**
  * Extractor resolver
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class ExtractorResolver implements ExtractorResolverInterface
 {

@@ -23,8 +23,6 @@ use Temp\MediaConverter\Format\Specification;
 
 /**
  * Image cache worker
- *
- * @author Stephan Wentz <sw@brainbits.net>
  */
 class ImageConverter implements ConverterInterface
 {

@@ -11,52 +11,52 @@
 
 namespace Temp\MediaConverter\Tests\Converter;
 
+use FFMpeg\FFMpeg;
+use FFMpeg\Media;
 use Prophecy\Argument;
 use Temp\MediaConverter\Converter\AudioConverter;
-use Temp\MediaConverter\Format\Audio;
-use Temp\MediaConverter\Format\Image;
-use Temp\MediaConverter\Format\Video;
+use Temp\MediaConverter\Format;
 
 /**
  * Audio converter test
  *
- * @author Stephan Wentz <stephan@wentz.it>
+ * @covers AudioConverter
  */
 class AudioConverterTest extends \PHPUnit_Framework_TestCase
 {
     public function testAccept()
     {
-        $ffmpeg = $this->prophesize('FFMpeg\FFMpeg');
+        $ffmpeg = $this->prophesize(FFMpeg::class);
         $converter = new AudioConverter($ffmpeg->reveal());
 
-        $this->assertTrue($converter->accept(new Audio()));
-        $this->assertFalse($converter->accept(new Image()));
-        $this->assertFalse($converter->accept(new Video()));
+        $this->assertTrue($converter->accept(new Format\Audio()));
+        $this->assertFalse($converter->accept(new Format\Image()));
+        $this->assertFalse($converter->accept(new Format\Video()));
     }
 
     public function testConvert()
     {
-        $ffmpeg = $this->prophesize('FFMpeg\FFMpeg');
-        $audio = $this->prophesize('FFMpeg\Media\Audio');
+        $ffmpeg = $this->prophesize(FFMpeg::class);
+        $audio = $this->prophesize(Media\Audio::class);
         $converter = new AudioConverter($ffmpeg->reveal());
 
         $ffmpeg->open('input')->willReturn($audio->reveal());
         $audio->save(Argument::any(), 'output')->shouldBeCalled();
 
-        $converter->convert('input', new Audio(), 'output');
+        $converter->convert('input', new Format\Audio(), 'output');
     }
 
     public function testConvertFull()
     {
-        $ffmpeg = $this->prophesize('FFMpeg\FFMpeg');
-        $audio = $this->prophesize('FFMpeg\Media\Audio');
+        $ffmpeg = $this->prophesize(FFMpeg::class);
+        $audio = $this->prophesize(Media\Audio::class);
         $converter = new AudioConverter($ffmpeg->reveal());
 
         $ffmpeg->open('input')->willReturn($audio->reveal());
         $audio->save(Argument::any(), 'output')->shouldBeCalled();
         $audio->addFilter(Argument::cetera())->shouldBeCalled();
 
-        $spec = new Audio();
+        $spec = new Format\Audio();
         $spec->setAudioFormat('aac')
             ->setAudioBitrate(100)
             ->setAudioChannels(2)

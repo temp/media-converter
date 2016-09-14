@@ -19,7 +19,7 @@ use Temp\MediaConverter\Format\Image;
 /**
  * Raw audio extractor test
  *
- * @author Stephan Wentz <stephan@wentz.it>
+ * @covers RawAudioExtractor
  */
 class RawAudioExtractorTest extends \PHPUnit_Framework_TestCase
 {

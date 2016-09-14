@@ -15,8 +15,6 @@ use Temp\MediaConverter\Format\Specification;
 
 /**
  * Video converter
- *
- * @author Stephan Wentz <sw@brainbits.net>
  */
 class ConverterResolver
 {

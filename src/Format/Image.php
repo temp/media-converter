@@ -13,8 +13,6 @@ namespace Temp\MediaConverter\Format;
 
 /**
  * Image specification
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class Image implements Specification
 {

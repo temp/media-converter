@@ -11,7 +11,9 @@
 
 namespace Temp\MediaConverter\Tests\Converter;
 
+use FFMpeg\FFMpeg;
 use Prophecy\Argument;
+use Temp\MediaConverter\Binary\MP4Box;
 use Temp\MediaConverter\Converter\VideoConverter;
 use Temp\MediaConverter\Format\Audio;
 use Temp\MediaConverter\Format\Image;
@@ -20,14 +22,14 @@ use Temp\MediaConverter\Format\Video;
 /**
  * Video converter test
  *
- * @author Stephan Wentz <stephan@wentz.it>
+ * @covers VideoConverter
  */
 class VideoConverterTest extends \PHPUnit_Framework_TestCase
 {
     public function testAccept()
     {
-        $ffmpeg = $this->prophesize('FFMpeg\FFMpeg');
-        $mp4box = $this->prophesize('MP4Box\MP4Box');
+        $ffmpeg = $this->prophesize(FFMpeg::class);
+        $mp4box = $this->prophesize(MP4Box::class);
         $converter = new VideoConverter($ffmpeg->reveal(), $mp4box->reveal());
 
         $this->assertTrue($converter->accept(new Video()));
@@ -37,9 +39,9 @@ class VideoConverterTest extends \PHPUnit_Framework_TestCase
 
     public function testConvert()
     {
-        $ffmpeg = $this->prophesize('FFMpeg\FFMpeg');
-        $mp4box = $this->prophesize('MP4Box\MP4Box');
-        $video = $this->prophesize('FFMpeg\Media\Video');
+        $ffmpeg = $this->prophesize(FFMpeg::class);
+        $mp4box = $this->prophesize(MP4Box::class);
+        $video = $this->prophesize(\FFMpeg\Media\Video::class);
         $converter = new VideoConverter($ffmpeg->reveal(), $mp4box->reveal());
 
         $ffmpeg->open('input')->willReturn($video->reveal());
@@ -51,9 +53,9 @@ class VideoConverterTest extends \PHPUnit_Framework_TestCase
 
     public function testConvertFull()
     {
-        $ffmpeg = $this->prophesize('FFMpeg\FFMpeg');
-        $mp4box = $this->prophesize('MP4Box\MP4Box');
-        $video = $this->prophesize('FFMpeg\Media\Audio');
+        $ffmpeg = $this->prophesize(FFMpeg::class);
+        $mp4box = $this->prophesize(MP4Box::class);
+        $video = $this->prophesize(\FFMpeg\Media\Audio::class);
         $converter = new VideoConverter($ffmpeg->reveal(), $mp4box->reveal());
 
         $ffmpeg->open('input')->willReturn($video->reveal());
@@ -73,7 +75,7 @@ class VideoConverterTest extends \PHPUnit_Framework_TestCase
             ->setAudioFormat('aac')
             ->setAudioBitrate(100)
             ->setAudioChannels(2)
-            ->setAudioCodec('libfdk_aac')
+            ->setAudioCodec('libfaac')
             ->setAudioSamplerate(1000);
 
         $converter->convert('input', $spec, 'output');

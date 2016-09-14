@@ -15,8 +15,6 @@ use FFMpeg\Format\Video\DefaultVideo;
 
 /**
  * Flv format
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class Flv extends DefaultVideo
 {

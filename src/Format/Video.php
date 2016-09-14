@@ -13,8 +13,6 @@ namespace Temp\MediaConverter\Format;
 
 /**
  * Video specification
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class Video implements Specification
 {

@@ -17,8 +17,6 @@ use Temp\MediaConverter\Format\Specification;
 
 /**
  * Delegating extractor
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class DelegatingExtractor implements ExtractorInterface
 {

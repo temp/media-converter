@@ -15,8 +15,6 @@ use Temp\MediaConverter\Format\Specification;
 
 /**
  * Converter interface
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 interface ConverterInterface
 {

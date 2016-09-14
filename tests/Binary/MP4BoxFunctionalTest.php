@@ -4,6 +4,9 @@ namespace Temp\MediaConverter\Tests\Binary;
 
 use Temp\MediaConverter\Binary\MP4Box;
 
+/**
+ * MP4Box functional test
+ */
 class MP4BoxFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     /**

@@ -17,8 +17,6 @@ use Temp\MediaConverter\Format\Specification;
 
 /**
  * Raw audio extractor
- *
- * @author Stephan Wentz <stephan@wentz.it>
  */
 class RawAudioExtractor implements ExtractorInterface
 {
