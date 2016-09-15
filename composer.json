@@ -32,7 +32,8 @@
         "mikey179/vfsStream": "^1.5",
         "php-ffmpeg/php-ffmpeg": " 0.5",
         "php-ffmpeg/extras": "^0.3",
-        "imagine/imagine": "^0.6"
+        "imagine/imagine": "^0.6",
+        "alchemy/phpexiftool": "^0.5"
     },
     "extra": {
         "branch-alias": {
