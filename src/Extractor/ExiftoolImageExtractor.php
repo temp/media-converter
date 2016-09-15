@@ -65,9 +65,7 @@ class ExiftoolImageExtractor implements ExtractorInterface
 
         $imageFilename = $this->tempDir . '/' . uniqid() . '.jpg';
 
-        foreach ($metadatas as $metadata) {
-            /* @var $metadata Metadata */
-
+        foreach ($metadatas->getMetadatas() as $metadata) {
             if ($metadata->getTag()->getName() !== 'Picture' &&
                     ValueInterface::TYPE_BINARY !== $metadata->getValue()->getType()) {
                 continue;
