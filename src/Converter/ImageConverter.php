@@ -71,12 +71,6 @@ class ImageConverter implements ConverterInterface
             }
         }
 
-        /*
-        if ($template->hasParameter('tiffcompression', true)) {
-            $image->setTiffCompression($template->getParameter('tiffcompression'));
-        }
-        */
-
         if ($spec->getColorspace()) {
             $image->strip();
 
@@ -105,20 +99,20 @@ class ImageConverter implements ConverterInterface
         $method = $spec->getResizeMode();
 
         if ($method === Image::RESIZE_METHOD_WIDTH) {
-            $size = $image->getSize()->widen($spec->getWidth());
-            $image->resize($size);
+            $specSize = $image->getSize()->widen($spec->getWidth());
+            $image->resize($specSize);
         } elseif ($method === Image::RESIZE_METHOD_HEIGHT) {
-            $size = $image->getSize()->heighten($spec->getHeight());
-            $image->resize($size);
+            $specSize = $image->getSize()->heighten($spec->getHeight());
+            $image->resize($specSize);
         } elseif ($method === Image::RESIZE_METHOD_EXACT) {
-            $size = new Box($spec->getWidth(), $spec->getHeight());
-            $image->resize($size);
+            $specSize = new Box($spec->getWidth(), $spec->getHeight());
+            $image->resize($specSize);
         } elseif ($method === Image::RESIZE_METHOD_FIT) {
-            $size = new Box($spec->getWidth(), $spec->getHeight());
-            $image = $image->thumbnail($size, ImageInterface::THUMBNAIL_INSET);
+            $specSize = new Box($spec->getWidth(), $spec->getHeight());
+            $image = $image->thumbnail($specSize, ImageInterface::THUMBNAIL_INSET);
         } elseif ($method === Image::RESIZE_METHOD_EXACT_FIT) {
-            $size = new Box($spec->getWidth(), $spec->getHeight());
-            $layer = $image->thumbnail($size, ImageInterface::THUMBNAIL_INSET);
+            $specSize = new Box($spec->getWidth(), $spec->getHeight());
+            $layer = $image->thumbnail($specSize, ImageInterface::THUMBNAIL_INSET);
             $layerSize = $layer->getSize();
 
             $palette = new RGB();
@@ -127,25 +121,25 @@ class ImageConverter implements ConverterInterface
             } else {
                 $color = $palette->color('#fff', 0);
             }
-            $image = $this->imagine->create($size, $color);
+            $image = $this->imagine->create($specSize, $color);
             $image->paste($layer, new Point(
-                floor(($size->getWidth() - $layerSize->getWidth()) / 2),
-                floor(($size->getHeight() - $layerSize->getHeight()) / 2)
+                floor(($specSize->getWidth() - $layerSize->getWidth()) / 2),
+                floor(($specSize->getHeight() - $layerSize->getHeight()) / 2)
             ));
         } elseif ($method === Image::RESIZE_METHOD_CROP) {
-            $size = new Box($spec->getWidth(), $spec->getHeight());
+            $specSize = new Box($spec->getWidth(), $spec->getHeight());
             $imageSize = $image->getSize();
 
-            if (!$size->contains($imageSize)) {
+            if (!$specSize->contains($imageSize)) {
                 $ratios = array(
-                    $size->getWidth() / $imageSize->getWidth(),
-                    $size->getHeight() / $imageSize->getHeight()
+                    $specSize->getWidth() / $imageSize->getWidth(),
+                    $specSize->getHeight() / $imageSize->getHeight()
                 );
                 $ratio = max($ratios);
-                if (!$imageSize->contains($size)) {
+                if (!$imageSize->contains($specSize)) {
                     $imageSize = new Box(
-                        min($imageSize->getWidth(), $size->getWidth()),
-                        min($imageSize->getHeight(), $size->getHeight())
+                        min($imageSize->getWidth(), $specSize->getWidth()),
+                        min($imageSize->getHeight(), $specSize->getHeight())
                     );
                 } else {
                     $imageSize = $imageSize->scale($ratio);
@@ -153,16 +147,15 @@ class ImageConverter implements ConverterInterface
                 }
 
                 if ($spec->getCenterX() && $spec->getCenterY()) {
-                    // TODO: correct?
                     $point = new Point($spec->getCenterX(), $spec->getCenterY());
                 } else {
                     $point = new Point(
-                        max(0, round(($imageSize->getWidth() - $size->getWidth()) / 2)),
-                        max(0, round(($imageSize->getHeight() - $size->getHeight()) / 2))
+                        max(0, round(($imageSize->getWidth() - $specSize->getWidth()) / 2)),
+                        max(0, round(($imageSize->getHeight() - $specSize->getHeight()) / 2))
                     );
                 }
 
-                $image->crop($point, $size);
+                $image->crop($point, $specSize);
             }
         }
 
